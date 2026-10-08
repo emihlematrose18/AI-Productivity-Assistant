@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChatRouteImport } from './routes/chat'
+import { Route as ConcernsRouteImport } from './routes/concerns'
 import { Route as SignsRouteImport } from './routes/signs'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const ChatRoute = ChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConcernsRoute = ConcernsRouteImport.update({
+  id: '/concerns',
+  path: '/concerns',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignsRoute = SignsRouteImport.update({
   id: '/signs',
   path: '/signs',
@@ -32,30 +38,34 @@ const SignsRoute = SignsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/concerns': typeof ConcernsRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/concerns': typeof ConcernsRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
+  '/concerns': typeof ConcernsRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/signs'
+  fullPaths: '/' | '/chat' | '/concerns' | '/signs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/signs'
-  id: '__root__' | '/' | '/chat' | '/signs'
+  to: '/' | '/chat' | '/concerns' | '/signs'
+  id: '__root__' | '/' | '/chat' | '/concerns' | '/signs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChatRoute: typeof ChatRoute
+  ConcernsRoute: typeof ConcernsRoute
   SignsRoute: typeof SignsRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/concerns': {
+      id: '/concerns'
+      path: '/concerns'
+      fullPath: '/concerns'
+      preLoaderRoute: typeof ConcernsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signs': {
       id: '/signs'
       path: '/signs'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatRoute: ChatRoute,
+  ConcernsRoute: ConcernsRoute,
   SignsRoute: SignsRoute,
 }
 export const routeTree = rootRouteImport
