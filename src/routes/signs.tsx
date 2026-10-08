@@ -18,7 +18,7 @@ import {
   errMsg,
 } from "@/components/app/ui";
 import { analyzeSigns, type SignsResult } from "@/lib/ai.functions";
-import { setState, uid } from "@/lib/store";
+import { setState, uid, type SavedConcern } from "@/lib/store";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -130,7 +130,7 @@ function SignsPage() {
     setState((s) => ({
       ...s,
       concerns: selected
-        .map((o) => ({ id: uid(), title: o, text: `Observed: ${o}`, date: new Date().toISOString().slice(0, 10), category: "Other", result: null, createdAt: new Date().toISOString() }))
+        .map((o): SavedConcern => ({ id: uid(), title: o, text: `Observed: ${o}`, date: new Date().toISOString().slice(0, 10), category: "Other", result: null, createdAt: new Date().toISOString() }))
         .concat(s.concerns),
     }));
     toast.success(`${selected.length} observation${selected.length > 1 ? "s" : ""} added to My Child's Concerns`);
