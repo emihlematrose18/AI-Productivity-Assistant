@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as ConcernsRouteImport } from './routes/concerns'
+import { Route as PlannerRouteImport } from './routes/planner'
+import { Route as ResearchRouteImport } from './routes/research'
 import { Route as SignsRouteImport } from './routes/signs'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +31,16 @@ const ConcernsRoute = ConcernsRouteImport.update({
   path: '/concerns',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlannerRoute = PlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignsRoute = SignsRouteImport.update({
   id: '/signs',
   path: '/signs',
@@ -39,12 +51,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
   '/concerns': typeof ConcernsRoute
+  '/planner': typeof PlannerRoute
+  '/research': typeof ResearchRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
   '/concerns': typeof ConcernsRoute
+  '/planner': typeof PlannerRoute
+  '/research': typeof ResearchRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRoutesById {
@@ -52,20 +68,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/chat': typeof ChatRoute
   '/concerns': typeof ConcernsRoute
+  '/planner': typeof PlannerRoute
+  '/research': typeof ResearchRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/concerns' | '/signs'
+  fullPaths: '/' | '/chat' | '/concerns' | '/planner' | '/research' | '/signs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/concerns' | '/signs'
-  id: '__root__' | '/' | '/chat' | '/concerns' | '/signs'
+  to: '/' | '/chat' | '/concerns' | '/planner' | '/research' | '/signs'
+  id:
+    | '__root__'
+    | '/'
+    | '/chat'
+    | '/concerns'
+    | '/planner'
+    | '/research'
+    | '/signs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ChatRoute: typeof ChatRoute
   ConcernsRoute: typeof ConcernsRoute
+  PlannerRoute: typeof PlannerRoute
+  ResearchRoute: typeof ResearchRoute
   SignsRoute: typeof SignsRoute
 }
 
@@ -92,6 +119,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConcernsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/planner': {
+      id: '/planner'
+      path: '/planner'
+      fullPath: '/planner'
+      preLoaderRoute: typeof PlannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signs': {
       id: '/signs'
       path: '/signs'
@@ -106,6 +147,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ChatRoute: ChatRoute,
   ConcernsRoute: ConcernsRoute,
+  PlannerRoute: PlannerRoute,
+  ResearchRoute: ResearchRoute,
   SignsRoute: SignsRoute,
 }
 export const routeTree = rootRouteImport
