@@ -50,7 +50,7 @@ function ConcernsPage() {
     setState((s) => ({
       ...s,
       concerns: [
-        { id: uid(), title: result.summary.split(/(?<=\.)\s/)[0].slice(0, 100), text, date, category: category || "Other", result, createdAt: new Date().toISOString() },
+        { id: uid(), title: (result.summary.split(/(?<=\.)\s/)[0] ?? result.summary).slice(0, 100), text, date, category: category || "Other", result, createdAt: new Date().toISOString() },
         ...s.concerns,
       ],
     }));

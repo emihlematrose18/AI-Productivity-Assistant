@@ -64,7 +64,7 @@ function ChatPage() {
     const question = messages.slice(0, i).reverse().find((m) => m.role === "user")?.content ?? "Chatbot response";
     setState((s) => ({
       ...s,
-      chats: [{ id: uid(), title: question.slice(0, 90), body: reply.content, createdAt: new Date().toISOString() }, ...s.chats],
+      chats: [{ id: uid(), title: question.slice(0, 90), body: reply?.content ?? "", createdAt: new Date().toISOString() }, ...s.chats],
     }));
     toast.success("Response saved to Saved Information");
   }
