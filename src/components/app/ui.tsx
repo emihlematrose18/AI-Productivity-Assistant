@@ -109,13 +109,13 @@ export function EditableSection({
   const text = isList ? value.join("\n") : value;
   return (
     <section>
-      <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-primary">{title}</h3>
+      {title && <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-primary">{title}</h3>}
       {editing ? (
         <Textarea
           value={text}
           rows={isList ? Math.max(3, value.length + 1) : 4}
           onChange={(e) => onChange(isList ? e.target.value.split("\n") : e.target.value)}
-          aria-label={title}
+          aria-label={title || "Edit text"}
         />
       ) : isList ? (
         <ul className="space-y-1.5 text-sm leading-relaxed">
