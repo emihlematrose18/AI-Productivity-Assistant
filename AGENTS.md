@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep dashboard and navigation translations in a browser-safe dictionary, using the persisted language setting; translate only known starter content so parents' saved words remain unchanged.
+- Saved information, settings and responsible AI have dedicated content routes using the shared local store and SEO helper, keeping navigation destinations valid without adding backend changes.

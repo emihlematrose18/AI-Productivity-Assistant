@@ -14,6 +14,9 @@ import { Route as ChatRouteImport } from './routes/chat'
 import { Route as ConcernsRouteImport } from './routes/concerns'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as ResponsibleAiRouteImport } from './routes/responsible-ai'
+import { Route as SavedRouteImport } from './routes/saved'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignsRouteImport } from './routes/signs'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +44,21 @@ const ResearchRoute = ResearchRouteImport.update({
   path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResponsibleAiRoute = ResponsibleAiRouteImport.update({
+  id: '/responsible-ai',
+  path: '/responsible-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SignsRoute = SignsRouteImport.update({
   id: '/signs',
   path: '/signs',
@@ -53,6 +71,9 @@ export interface FileRoutesByFullPath {
   '/concerns': typeof ConcernsRoute
   '/planner': typeof PlannerRoute
   '/research': typeof ResearchRoute
+  '/responsible-ai': typeof ResponsibleAiRoute
+  '/saved': typeof SavedRoute
+  '/settings': typeof SettingsRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +82,9 @@ export interface FileRoutesByTo {
   '/concerns': typeof ConcernsRoute
   '/planner': typeof PlannerRoute
   '/research': typeof ResearchRoute
+  '/responsible-ai': typeof ResponsibleAiRoute
+  '/saved': typeof SavedRoute
+  '/settings': typeof SettingsRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRoutesById {
@@ -70,13 +94,34 @@ export interface FileRoutesById {
   '/concerns': typeof ConcernsRoute
   '/planner': typeof PlannerRoute
   '/research': typeof ResearchRoute
+  '/responsible-ai': typeof ResponsibleAiRoute
+  '/saved': typeof SavedRoute
+  '/settings': typeof SettingsRoute
   '/signs': typeof SignsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/concerns' | '/planner' | '/research' | '/signs'
+  fullPaths:
+    | '/'
+    | '/chat'
+    | '/concerns'
+    | '/planner'
+    | '/research'
+    | '/responsible-ai'
+    | '/saved'
+    | '/settings'
+    | '/signs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/concerns' | '/planner' | '/research' | '/signs'
+  to:
+    | '/'
+    | '/chat'
+    | '/concerns'
+    | '/planner'
+    | '/research'
+    | '/responsible-ai'
+    | '/saved'
+    | '/settings'
+    | '/signs'
   id:
     | '__root__'
     | '/'
@@ -84,6 +129,9 @@ export interface FileRouteTypes {
     | '/concerns'
     | '/planner'
     | '/research'
+    | '/responsible-ai'
+    | '/saved'
+    | '/settings'
     | '/signs'
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +141,9 @@ export interface RootRouteChildren {
   ConcernsRoute: typeof ConcernsRoute
   PlannerRoute: typeof PlannerRoute
   ResearchRoute: typeof ResearchRoute
+  ResponsibleAiRoute: typeof ResponsibleAiRoute
+  SavedRoute: typeof SavedRoute
+  SettingsRoute: typeof SettingsRoute
   SignsRoute: typeof SignsRoute
 }
 
@@ -133,6 +184,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/responsible-ai': {
+      id: '/responsible-ai'
+      path: '/responsible-ai'
+      fullPath: '/responsible-ai'
+      preLoaderRoute: typeof ResponsibleAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signs': {
       id: '/signs'
       path: '/signs'
@@ -149,6 +221,9 @@ const rootRouteChildren: RootRouteChildren = {
   ConcernsRoute: ConcernsRoute,
   PlannerRoute: PlannerRoute,
   ResearchRoute: ResearchRoute,
+  ResponsibleAiRoute: ResponsibleAiRoute,
+  SavedRoute: SavedRoute,
+  SettingsRoute: SettingsRoute,
   SignsRoute: SignsRoute,
 }
 export const routeTree = rootRouteImport
