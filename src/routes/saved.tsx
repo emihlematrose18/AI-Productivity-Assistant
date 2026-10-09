@@ -8,7 +8,7 @@ import { seo } from "@/lib/seo";
 const tabs = ["chats", "concerns", "plans", "research"] as const;
 type SavedTab = typeof tabs[number];
 export const Route = createFileRoute("/saved")({
-  validateSearch: (search: Record<string, unknown>): { tab: SavedTab } => ({ tab: tabs.find((tab) => tab === search.tab) ?? "chats" }),
+  validateSearch: (search: Record<string, unknown>): { tab: SavedTab } => ({ tab: tabs.find((tab) => tab === search["tab"]) ?? "chats" }),
   head: () => seo("Saved Information — AutismCare AI", "Your saved conversations, concerns, routines and research in AutismCare AI."),
   component: SavedPage,
 });
