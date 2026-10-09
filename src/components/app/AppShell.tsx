@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAppState } from "@/lib/store";
+import { dashboardCopy } from "@/lib/dashboard-language";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -29,6 +30,8 @@ const NAV = [
 ] as const;
 
 function Brand() {
+  const language = useAppState((s) => s.settings.language);
+  const copy = dashboardCopy(language);
   return (
     <Link to="/" className="flex items-center gap-3">
       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground shadow-card">
@@ -36,19 +39,21 @@ function Brand() {
       </span>
       <span className="min-w-0">
         <span className="block truncate text-base font-bold tracking-tight">AutismCare AI</span>
-        <span className="block truncate text-xs text-muted-foreground">Parent & caregiver support</span>
+        <span className="block text-xs text-muted-foreground">{copy.subtitle}</span>
       </span>
     </Link>
   );
 }
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
+  const language = useAppState((s) => s.settings.language);
+  const copy = dashboardCopy(language);
   const path = useRouterState({ select: (s) => s.location.pathname });
   const item = "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors";
   return (
     <div className="flex h-full flex-col">
       <nav className="flex flex-1 flex-col gap-1" aria-label="Main">
-        {NAV.map(({ to, label, icon: Icon }) => {
+        {NAV.map(({ to, icon: Icon }, index) => {
           const active = to === "/" ? path === "/" : path.startsWith(to);
           return (
             <Link
@@ -64,7 +69,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
               )}
             >
               <Icon className="h-4 w-4 shrink-0" />
-              <span className="truncate">{label}</span>
+              <span className="min-w-0 break-words">{copy.nav[index]}</span>
             </Link>
           );
         })}
@@ -79,7 +84,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
         )}
       >
         <ShieldCheck className="h-4 w-4 shrink-0" />
-        Responsible AI
+        {copy.responsible}
       </Link>
     </div>
   );

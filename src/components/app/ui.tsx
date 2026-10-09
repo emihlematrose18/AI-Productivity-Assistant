@@ -23,15 +23,14 @@ export function Panel({ className, children }: { className?: string; children: R
   return <div className={cn("rounded-2xl border bg-card p-5 shadow-card sm:p-6", className)}>{children}</div>;
 }
 
-export function ResponsibleNotice({ compact }: { compact?: boolean }) {
+export function ResponsibleNotice({ compact, title = "Responsible AI Notice", text }: { compact?: boolean; title?: string; text?: string }) {
   return (
     <div className="flex gap-3 rounded-2xl border border-warning/50 bg-warning-soft p-4 text-sm text-warning-foreground">
       <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0" />
       <div className="min-w-0">
-        <p className="font-semibold">Responsible AI Notice</p>
+        <p className="font-semibold">{title}</p>
         <p className="mt-1">
-          AutismCare AI provides general educational and supportive information. It does not diagnose autism and does
-          not replace advice from qualified healthcare, developmental, educational or therapeutic professionals.
+          {text ?? "AutismCare AI provides general educational and supportive information. It does not diagnose autism and does not replace advice from qualified healthcare, developmental, educational or therapeutic professionals."}
         </p>
         {!compact && (
           <p className="mt-1">
