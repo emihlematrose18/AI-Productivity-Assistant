@@ -13,9 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as ConcernsRouteImport } from './routes/concerns'
+import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as PlannerRouteImport } from './routes/planner'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ResponsibleAiRouteImport } from './routes/responsible-ai'
+import { Route as RiskRouteImport } from './routes/risk'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SignsRouteImport } from './routes/signs'
@@ -40,9 +43,19 @@ const ConcernsRoute = ConcernsRouteImport.update({
   path: '/concerns',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DisclaimerRoute = DisclaimerRouteImport.update({
+  id: '/disclaimer',
+  path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlannerRoute = PlannerRouteImport.update({
   id: '/planner',
   path: '/planner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResearchRoute = ResearchRouteImport.update({
@@ -53,6 +66,11 @@ const ResearchRoute = ResearchRouteImport.update({
 const ResponsibleAiRoute = ResponsibleAiRouteImport.update({
   id: '/responsible-ai',
   path: '/responsible-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiskRoute = RiskRouteImport.update({
+  id: '/risk',
+  path: '/risk',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SavedRoute = SavedRouteImport.update({
@@ -76,9 +94,12 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/chat': typeof ChatRoute
   '/concerns': typeof ConcernsRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/planner': typeof PlannerRoute
+  '/privacy': typeof PrivacyRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
+  '/risk': typeof RiskRoute
   '/saved': typeof SavedRoute
   '/settings': typeof SettingsRoute
   '/signs': typeof SignsRoute
@@ -88,9 +109,12 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/chat': typeof ChatRoute
   '/concerns': typeof ConcernsRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/planner': typeof PlannerRoute
+  '/privacy': typeof PrivacyRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
+  '/risk': typeof RiskRoute
   '/saved': typeof SavedRoute
   '/settings': typeof SettingsRoute
   '/signs': typeof SignsRoute
@@ -101,9 +125,12 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/chat': typeof ChatRoute
   '/concerns': typeof ConcernsRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/planner': typeof PlannerRoute
+  '/privacy': typeof PrivacyRoute
   '/research': typeof ResearchRoute
   '/responsible-ai': typeof ResponsibleAiRoute
+  '/risk': typeof RiskRoute
   '/saved': typeof SavedRoute
   '/settings': typeof SettingsRoute
   '/signs': typeof SignsRoute
@@ -115,9 +142,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/chat'
     | '/concerns'
+    | '/disclaimer'
     | '/planner'
+    | '/privacy'
     | '/research'
     | '/responsible-ai'
+    | '/risk'
     | '/saved'
     | '/settings'
     | '/signs'
@@ -127,9 +157,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/chat'
     | '/concerns'
+    | '/disclaimer'
     | '/planner'
+    | '/privacy'
     | '/research'
     | '/responsible-ai'
+    | '/risk'
     | '/saved'
     | '/settings'
     | '/signs'
@@ -139,9 +172,12 @@ export interface FileRouteTypes {
     | '/about'
     | '/chat'
     | '/concerns'
+    | '/disclaimer'
     | '/planner'
+    | '/privacy'
     | '/research'
     | '/responsible-ai'
+    | '/risk'
     | '/saved'
     | '/settings'
     | '/signs'
@@ -152,9 +188,12 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ChatRoute: typeof ChatRoute
   ConcernsRoute: typeof ConcernsRoute
+  DisclaimerRoute: typeof DisclaimerRoute
   PlannerRoute: typeof PlannerRoute
+  PrivacyRoute: typeof PrivacyRoute
   ResearchRoute: typeof ResearchRoute
   ResponsibleAiRoute: typeof ResponsibleAiRoute
+  RiskRoute: typeof RiskRoute
   SavedRoute: typeof SavedRoute
   SettingsRoute: typeof SettingsRoute
   SignsRoute: typeof SignsRoute
@@ -190,11 +229,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConcernsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/disclaimer': {
+      id: '/disclaimer'
+      path: '/disclaimer'
+      fullPath: '/disclaimer'
+      preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planner': {
       id: '/planner'
       path: '/planner'
       fullPath: '/planner'
       preLoaderRoute: typeof PlannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/research': {
@@ -209,6 +262,13 @@ declare module '@tanstack/react-router' {
       path: '/responsible-ai'
       fullPath: '/responsible-ai'
       preLoaderRoute: typeof ResponsibleAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risk': {
+      id: '/risk'
+      path: '/risk'
+      fullPath: '/risk'
+      preLoaderRoute: typeof RiskRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/saved': {
@@ -240,9 +300,12 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ChatRoute: ChatRoute,
   ConcernsRoute: ConcernsRoute,
+  DisclaimerRoute: DisclaimerRoute,
   PlannerRoute: PlannerRoute,
+  PrivacyRoute: PrivacyRoute,
   ResearchRoute: ResearchRoute,
   ResponsibleAiRoute: ResponsibleAiRoute,
+  RiskRoute: RiskRoute,
   SavedRoute: SavedRoute,
   SettingsRoute: SettingsRoute,
   SignsRoute: SignsRoute,
