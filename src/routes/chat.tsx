@@ -84,7 +84,7 @@ function ChatPage() {
         <div className="flex items-center justify-between gap-2 border-b px-4 py-3">
           <p className="text-sm font-medium">Conversation</p>
           <Button variant="ghost" size="sm" disabled={!messages.length} onClick={() => { setMessages([]); setError(""); }}>
-            <Trash2 /> Clear conversation
+            <Trash2 /> Clear Chat
           </Button>
         </div>
 

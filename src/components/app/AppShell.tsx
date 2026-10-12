@@ -17,6 +17,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useAppState } from "@/lib/store";
 import { dashboardCopy } from "@/lib/dashboard-language";
+import { Footer } from "@/components/app/Footer";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -132,7 +133,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       )}
 
       <main className="lg:pl-64">
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">{children}</div>
+        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">{children}<Footer /></div>
       </main>
     </div>
   );
