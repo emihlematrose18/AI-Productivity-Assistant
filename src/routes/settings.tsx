@@ -7,6 +7,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { LANGUAGES } from "@/lib/dashboard-language";
 import { setState, useAppState, type Settings as AppSettings } from "@/lib/store";
 import { seo } from "@/lib/seo";
+import { useEffect, useState } from "react";
+import { isOptedOut, setOptOut } from "@/lib/analytics";
+
+function AnalyticsToggle() {
+  const [on, setOn] = useState(true);
+  useEffect(() => setOn(!isOptedOut()), []);
+  return (
+    <div className="flex items-center justify-between gap-4 border-t pt-4">
+      <label htmlFor="analytics">Share anonymous usage counts<span className="block text-xs text-muted-foreground">No personal or child data. Turn off anytime.</span></label>
+      <Switch id="analytics" checked={on} onCheckedChange={(v) => { setOn(v); setOptOut(!v); }} />
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/settings")({
   head: () => seo("Settings — AutismCare AI", "Manage your AutismCare AI profile, language and accessibility preferences."),
@@ -23,6 +36,7 @@ function SettingsPage() {
       <div><label htmlFor="settings-language" className="mb-2 block text-sm font-medium">Language</label><Select value={settings.language} onValueChange={(value) => update("language", value)}><SelectTrigger id="settings-language"><SelectValue /></SelectTrigger><SelectContent>{LANGUAGES.map((item) => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectContent></Select></div>
       <div className="flex items-center justify-between gap-4 border-t pt-4"><label htmlFor="large-text">Larger text</label><Switch id="large-text" checked={settings.largeText} onCheckedChange={(value) => update("largeText", value)} /></div>
       <div className="flex items-center justify-between gap-4"><label htmlFor="reduce-motion">Reduce motion</label><Switch id="reduce-motion" checked={settings.reduceMotion} onCheckedChange={(value) => update("reduceMotion", value)} /></div>
+      <AnalyticsToggle />
     </div>
   </div>;
 }

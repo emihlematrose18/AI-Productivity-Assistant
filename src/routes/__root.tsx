@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppShell } from "@/components/app/AppShell";
 import { Toaster } from "@/components/ui/sonner";
+import { track } from "@/lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -113,6 +114,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("ac-visit")) return;
+      sessionStorage.setItem("ac-visit", "1");
+      const lang = JSON.parse(localStorage.getItem("autismcare-ai-v1") || "{}")?.settings?.language ?? "English";
+      track("visit", lang);
+    } catch {}
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <AppShell>
