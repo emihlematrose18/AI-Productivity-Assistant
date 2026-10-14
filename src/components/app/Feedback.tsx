@@ -39,7 +39,7 @@ export function Feedback() {
           <Textarea value={comment} maxLength={200} rows={2} onChange={(e) => setComment(e.target.value)} placeholder="What was helpful or not? (optional, anonymous)" aria-label="Feedback comment" className="text-sm" />
           <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
             <span>{comment.length}/200 · Please don't include names, phone numbers or emails.</span>
-            <Button size="sm" disabled={busy || pii} onClick={submit}>Send</Button>
+            <Button size="sm" disabled={busy || pii} onClick={submit}>Send feedback</Button>
           </div>
           {pii && <p role="alert" className="text-xs text-destructive">Please remove phone numbers or email addresses — feedback must stay anonymous.</p>}
           {err && <p role="alert" className="text-xs text-destructive">{err}</p>}
