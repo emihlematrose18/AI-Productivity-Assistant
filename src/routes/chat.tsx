@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ErrorBox, PageHeader, ResponsibleNotice, errMsg } from "@/components/app/ui";
 import { chatWithAI } from "@/lib/ai.functions";
-import { setState, uid } from "@/lib/store";
+import { setState, uid, useAppState } from "@/lib/store";
+import { track } from "@/lib/analytics";
+import { Feedback } from "@/components/app/Feedback";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/chat")({
@@ -30,6 +32,7 @@ type Msg = { id: string; role: "user" | "assistant"; content: string };
 function ChatPage() {
   const { q } = Route.useSearch();
   const chat = useServerFn(chatWithAI);
+  const language = useAppState((s) => s.settings.language);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,6 +47,7 @@ function ChatPage() {
   async function send(text: string) {
     const content = text.trim();
     if (!content || loading) return;
+    if (!messages.length) track("chat_started", language);
     const next = [...messages, { id: uid(), role: "user" as const, content }];
     setMessages(next);
     setInput("");
@@ -83,7 +87,7 @@ function ChatPage() {
       <div className="flex h-[min(70vh,680px)] min-h-[440px] flex-col overflow-hidden rounded-2xl border bg-card shadow-card">
         <div className="flex items-center justify-between gap-2 border-b px-4 py-3">
           <p className="text-sm font-medium">Conversation</p>
-          <Button variant="ghost" size="sm" disabled={!messages.length} onClick={() => { setMessages([]); setError(""); }}>
+          <Button variant="ghost" size="sm" disabled={!messages.length} onClick={() => { setMessages([]); setError(""); track("clear_chat", language); }}>
             <Trash2 /> Clear Chat
           </Button>
         </div>
@@ -115,6 +119,7 @@ function ChatPage() {
                     <Button variant="ghost" size="sm" onClick={() => save(i)}>
                       <Bookmark /> Save response
                     </Button>
+                    <Feedback />
                   </div>
                 )}
               </div>
